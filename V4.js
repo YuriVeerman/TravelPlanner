@@ -466,7 +466,6 @@ window.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Na initialisatie: extra beveiliging tegen interactie
 miniMap.scrollZoom.disable();
 miniMap.boxZoom.disable();
 miniMap.dragRotate.disable();
@@ -475,7 +474,6 @@ miniMap.keyboard.disable();
 miniMap.doubleClickZoom.disable();
 miniMap.touchZoomRotate.disable();
 
-// Ook na toevoegen van een nieuwe stop
     setupAutocompleteForSearchLines();
     setupClearButtons();
     setupInputEmptyCheck();
