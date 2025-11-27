@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hoofplanner</title>
+    <link rel="stylesheet" href="V4.css" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css"
+rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+</head>
+<body>
+<!-- Mapbox kaart -->
+  <div id="mainMap"></div>
+  <div id="mainMap-zoom-controls">
+    <button id="mainMap-zoom-in" title="Inzoomen">+</button>
+    <button id="mainMap-zoom-out" title="Uitzoomen">-</button>
+  </div>
+
+<!--menu-->
+    <div id="menu-button">
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+    </div>
+
+<!--panels-->
+    <div id="left-panel">
+        <div id="search-center">
+            <div id="search-line-container">
+                <div class="search-line">
+                    <input  type="search"
+                            id="start-location-input"
+                            class="location-search-input"
+                            placeholder="Start">
+                            <button class="clear-button">x</button>
+                        <br>
+                </div>
+                <div class="search-line">
+                    <input  type="search"
+                            id="end-location-input"
+                            class="location-search-input"
+                            placeholder="End">
+                            <button class="clear-button">x</button>
+                        <br>
+                </div>
+            </div>
+             <button id="add-stop-button" class="standard-button">Add Stop</button>
+        </div>
+
+        <div id="search-blocker">
+            <button id="edit-route-button" class="standard-button">Edit Route</button>
+        </div>
+        <div id="information-form">hier komt het persoonsinformatie formulier
+            <button id="save-route-button" class="standard-button">Save Route</button>
+        </div>
+        </div>
+    <div id="right-panel">
+        <div id="map+info-container">
+            <div id="mini-map">
+            </div>
+            <div id="mini-map-info">
+                Total distance: <span id="total-distance">-</span> km<br>
+            </div>
+        </div>
+    </div>
+    <div id="step_meter">
+        <div id="step3" class="steps">step 3
+            <div class="extra-info">extra infoh34fisucusebwbe8cgsuebcui</div>
+        </div>
+        <div id="step2" class="steps">step 2</div>
+        <div id="step1" class="steps">step 1</div>
+
+    </div>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <script src="V4.JS"></script>
+</body>
+</html>

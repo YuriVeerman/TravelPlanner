@@ -1,0 +1,322 @@
+html, body, input, button, select, textarea {
+    font-family: "san francisco",sans-serif;
+}
+
+html, body {
+    background: scrolling;
+    height: 100%;
+    width: 300vw;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/*global variables*/
+:root {
+    /*distances*/
+    --panel-edge-distance: 30px;
+    --panel-width: 20vw;
+
+    /*for greyed out fields*/
+    --greyed-out: rgba(30, 30, 30, 0.5);
+
+    /*border radii*/
+    --BR-big: 10px;
+    --BR-medium: 8px;
+    --BR-small: 6px;
+}
+
+#mainMap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100vw;
+}
+/*standard formatting for search fields is disabled below*/
+input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+}
+/*MAIN SETTINGS END---------------------------------------------------*/
+
+/*PANEL SETTINGS------------------------------------------------------*/
+/*Left and right panel common styles*/
+#left-panel, #right-panel {
+    position: fixed;
+    top: var(--panel-edge-distance);
+    width: var(--panel-width);
+
+    /*gap between elements*/
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/*left panel specific styles*/
+#left-panel {
+    left: var(--panel-edge-distance);
+}
+/*right panel specific styles*/
+#right-panel {
+    right: calc(var(--panel-edge-distance) + 40px);
+}
+
+/*Left and right panel common styles*/
+#left-panel > * , #right-panel > * {
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: var(--BR-big);
+}
+
+/*Left panel child element styles*/
+#left-panel > * {
+    background-color: rgb(255, 255, 255);
+}
+
+#search-center {
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#search-line-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.search-line {
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    background-color: #ffffff;
+    border-radius: var(--BR-medium);
+}
+
+.search-line > * {
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+    .location-search-input {
+        flex-grow: 1;
+        padding: 10px;
+        border: none;
+        outline: none;
+        font-size: 1em;
+    }
+
+    .clear-button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 1em;
+
+    }
+
+.standard-button {
+    align-self: center;
+    width: flex;
+}
+/*Middle panel*/
+#step_meter {
+    background: #ffffff;
+    position: fixed;
+    top: var(--panel-edge-distance);
+    left: calc((2* var(--panel-edge-distance)) + var(--panel-width) + 40px);
+    width: calc(100% - (4 * var(--panel-edge-distance) + 2 * var(--panel-width) + 80px));
+    height: 100px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: var(--BR-big);
+    z-index: 11010;
+    display: flex;
+    flex-direction: row-reverse; /* zodat ze naast elkaar komen te staan */
+    gap: 0;
+}
+
+#step_meter, .steps {
+    border-radius: var(--BR-big);
+    border-color:rgba(0, 0, 0, 0.2);
+}
+
+.steps {
+    height: 100%;
+    background: #ffffff;
+    width: auto;
+    flex: 1;
+    min-width: 0;
+    margin-left: calc(-2 * var(--BR-big));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-color:rgb(124, 124, 124);
+    border-width: 2px;
+    border-style: solid;
+}
+
+.extra-info {
+    display: none;
+    padding: 10px;
+    z-index: 20;
+}
+
+#step_meter > .steps .extra-info {
+    display: none;
+}
+
+#step_meter > .steps:hover .extra-info {
+    display: block;
+}
+
+.steps > * :first-child {
+    margin-left: 0;
+}
+
+.steps:hover, .steps:focus {
+    flex-grow: 4;
+    background: #aaa;
+    transition: 0.3s;
+}
+
+/*Menu stuff*/
+#menu-button, #menu-button:hover {
+    z-index: 10002;
+    padding: 20px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+#menu-button {
+    position: fixed;
+    bottom: var(--panel-edge-distance);
+    left: var(--panel-edge-distance);
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+.menu-line {
+    width: 100%;
+    height: 10px;
+    background-color: #747474;
+    border-radius: 5px;
+    z-index: 10003;
+}
+
+#menu-button:hover {
+    position: fixed;
+    bottom: 0;
+    left: 0px; /*40 px is 2x the padding ;)*/
+    width: calc(var(--panel-width) + var(--panel-edge-distance));
+    height: calc(100% - 40px);
+    border-radius: 0px;
+    transition: all 0.3s ease;
+}
+
+/* search block is made to block the ability to search when on the
+right screen */
+#search-blocker {
+    position: fixed;
+    top: var(--panel-edge-distance);
+    left: var(--panel-edge-distance);
+    width: calc(var(--panel-width) + 40px);
+    background-color: var(--greyed-out);
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+}
+
+#right-panel > * {
+    background-color: rgba(255, 255, 255);
+}
+#mini-map {
+    top: -20px;
+    left: -20px;
+    height: 200px;
+    width: 100%;
+    border-radius: var(--BR-big);
+    padding: 20px;
+}
+/*PANEL SETTINGS END--------------------------------------------------*/
+
+/* Suggestiebox styling met afgeronde onderhoeken, ook als er een scrollbar is */
+.suggestion-box {
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    overflow-y: auto;
+    background: #fff;
+    /* Voor Firefox */
+    scrollbar-color: #ccc #fff;
+    scrollbar-width: thin;
+    min-width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Scrollbar styling voor Webkit (Chrome/Safari/Edge) */
+.suggestion-box::-webkit-scrollbar {
+    width: 8px;
+}
+.suggestion-box::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+}
+.suggestion-box::-webkit-scrollbar-track {
+    background: #fff;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    margin-bottom: 2px; /* kleine marge zodat de radius zichtbaar blijft */
+}
+
+/* Forceer dat de rechter onderhoek niet wordt afgesneden door de scrollbar */
+.suggestion-box {
+    clip-path: inset(0px 0px -16px 0px round 0 0 16px 16px);
+}
+
+/* Zoom controls links onderin */
+#mainMap-zoom-controls {
+    position: absolute;
+    right: var(--panel-edge-distance);
+    bottom: 30px;
+    z-index: 10001;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    pointer-events: auto;
+}
+#mainMap-zoom-controls button {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1.5em;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s;
+}
+#mainMap-zoom-controls button:hover {
+    background: #f0f0f0;
+}
+@media (max-width: 900px) {
+    #mainMap-zoom-controls {
+        left: 10px;
+        bottom: 10px;
+    }
+}
